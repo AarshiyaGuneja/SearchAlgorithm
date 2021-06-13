@@ -1,0 +1,6 @@
+search/algorithm/Controllers/SearchController.class
+search/algorithm/Setup.class
+search/algorithm/Application.class
+search/algorithm/Services/NetflixTitlesService.class
+search/algorithm/Repositories/NetflixTitlesRepository.class
+search/algorithm/Models/NetflixTitles.class
