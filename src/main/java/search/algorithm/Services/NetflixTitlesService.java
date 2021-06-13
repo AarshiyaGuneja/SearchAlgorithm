@@ -9,6 +9,7 @@ import search.algorithm.Setup;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 
 @Service
 public class NetflixTitlesService {
@@ -51,9 +52,9 @@ public class NetflixTitlesService {
             HashSet<String> resultsTwo = (HashSet) hashMap.get(parts[2]);
             HashSet<String> tmpResultsTwo = (HashSet<String>) resultsTwo.clone();
 
-            if (parts[1].equals("OR")) return handleOrSearch(tmpResultsOne, tmpResultsTwo);
+            if (parts[1].toUpperCase(Locale.ROOT).equals("OR")) return handleOrSearch(tmpResultsOne, tmpResultsTwo);
 
-            if (parts[1].equals("AND")) return handleAndSearch(tmpResultsOne, tmpResultsTwo);
+            if (parts[1].toUpperCase(Locale.ROOT).equals("AND")) return handleAndSearch(tmpResultsOne, tmpResultsTwo);
         }
         return null;
     }

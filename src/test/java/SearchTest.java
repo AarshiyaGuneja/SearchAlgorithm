@@ -36,4 +36,32 @@ public class SearchTest {
         LinkedHashMap hashMap = Setup.initialise("src/main/resources/Data/data.txt");
         assertTrue(hashMap != null);
     }
+
+    @Test
+    public void testORSearch()
+    {
+        List<String> words = new ArrayList<>();
+        words.add("Java");
+        LinkedHashMap<String, HashSet> hashMap = new LinkedHashMap<String, HashSet>();
+        Setup.addEntryToHashMap(hashMap, words, "Language");
+        words.clear();
+        words.add("SpringBoot");
+        Setup.addEntryToHashMap(hashMap, words, "Frameworks");
+        HashSet<String> results = netflixTitlesService.search("Java OR SpringBoot", hashMap);
+        assertTrue(results.contains("Language") && results.contains("Frameworks"));
+    }
+
+    @Test
+    public void testANDSearch()
+    {
+        List<String> words = new ArrayList<>();
+        words.add("Java");
+        LinkedHashMap<String, HashSet> hashMap = new LinkedHashMap<String, HashSet>();
+        Setup.addEntryToHashMap(hashMap, words, "Language");
+        words.clear();
+        words.add("SpringBoot");
+        Setup.addEntryToHashMap(hashMap, words, "Frameworks");
+        HashSet<String> results = netflixTitlesService.search("Java AND SpringBoot", hashMap);
+        assertTrue(results.isEmpty());
+    }
 }
