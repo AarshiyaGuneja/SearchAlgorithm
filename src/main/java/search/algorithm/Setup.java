@@ -44,6 +44,7 @@ public class Setup {
 
                 words.clear();
                 relatedObject.setLength(0);
+                word.trim();
                 while ( !(word.startsWith("s") && Character.isDigit((word.charAt((1))))) && word != null)
                  {
                      words.add(word);
@@ -51,7 +52,8 @@ public class Setup {
                      relatedObject.append(word);
                      word = file.readLine();
                      if(word == null)
-                         break;;
+                         break;
+                     word.trim();
                  }
                 mappedObjects = relatedObject.toString();
 

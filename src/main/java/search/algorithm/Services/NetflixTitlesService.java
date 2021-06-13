@@ -6,10 +6,7 @@ import search.algorithm.Models.NetflixTitles;
 import search.algorithm.Repositories.NetflixTitlesRepository;
 import search.algorithm.Setup;
 
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 @Service
 public class NetflixTitlesService {
@@ -41,9 +38,11 @@ public class NetflixTitlesService {
 
         String[] parts = query.split(" ");
 
-        if (query.length() == 0) return null;
+        if (query.length() == 0) return new HashSet<>();
 
         if (parts.length == 1) return handleSimpleSearch(hashMap, parts[0]);
+
+        if (parts.length == 2) return handleSimpleSearch(hashMap, query);
 
         if (parts.length == 3)
         {
@@ -56,7 +55,7 @@ public class NetflixTitlesService {
 
             if (parts[1].toUpperCase(Locale.ROOT).equals("AND")) return handleAndSearch(tmpResultsOne, tmpResultsTwo);
         }
-        return null;
+        return new HashSet<>();
     }
 
     /**
@@ -75,7 +74,7 @@ public class NetflixTitlesService {
      */
     private static HashSet<String> handleOrSearch (HashSet<String> resultOne, HashSet<String> resultTwo) {
 
-        if (resultOne == null && resultTwo == null) return null;
+        if (resultOne == null && resultTwo == null) return new HashSet<>();
 
         if (resultOne == null) return resultTwo;
 
@@ -92,7 +91,7 @@ public class NetflixTitlesService {
      */
     private static HashSet<String> handleAndSearch (HashSet<String> resultOne, HashSet<String> resultTwo) {
 
-        if (resultOne == null || resultTwo == null) return null;
+        if (resultOne == null || resultTwo == null) return new HashSet<>();
 
         resultOne.retainAll(resultTwo);
 
